@@ -51,7 +51,7 @@ describe('Statistic', () => {
   it('calculates average grade', () => {
     expect(statsNoRecords.averageGrade).toBe(0);
     expect(stats2Records.averageGrade).toBe(77);
-    expect(stats4Records.averageGrade).toBe(82);
+    expect(stats4Records.averageGrade).toBe(83);
   });
 
 });

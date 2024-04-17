@@ -1,7 +1,7 @@
-import { Record } from './record.model';
+import {Record} from './record.model';
 
 export class Statistic {
-  private _records: Record[];
+  private readonly _records: Record[];
 
   constructor(records: Record[]) {
     this._records = records;
@@ -20,14 +20,30 @@ export class Statistic {
   }
 
   get crpToEnd(): number {
-    const totalCrpNeeded = 180; // Assuming total credits needed for graduation
+    const totalCrpNeeded = 180;
     return totalCrpNeeded - this.sumCrp;
   }
 
   get averageGrade(): number {
+    let totalGrade = 0;
+    let totalModules = 0;
+
     if (this._records.length === 0) return 0;
 
-    const totalGrades = this._records.reduce((sum, record) => sum + record.grade, 0);
-    return Math.round(totalGrades / this._records.length);
+    for (const record of this._records) {
+
+      if (record.halfWeighted) {
+
+        totalGrade += record.grade / 2
+        totalModules += 0.5
+
+      } else {
+
+        totalGrade += record.grade
+        totalModules += 1
+
+      }
+    }
+    return Math.round(totalGrade / totalModules)
   }
 }
