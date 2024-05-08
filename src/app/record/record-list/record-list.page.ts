@@ -3,14 +3,23 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import {Record} from "../record.model";
 import {Statistic} from "../statistic.model";
-import {IonButton, IonContent, IonHeader, IonNav, IonTitle, IonToolbar} from '@ionic/angular/standalone';
+import {
+  IonButton, IonButtons,
+  IonContent,
+  IonHeader,
+  IonIcon, IonItem,
+  IonList,
+  IonNav,
+  IonTitle,
+  IonToolbar
+} from '@ionic/angular/standalone';
 
 @Component({
   selector: 'app-record-list',
   templateUrl: './record-list.page.html',
   styleUrls: ['./record-list.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonButton, IonNav]
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonButton, IonNav, IonIcon, IonList, IonItem, IonButtons]
 })
 export class RecordListPage {
 
@@ -38,6 +47,11 @@ export class RecordListPage {
 
   }
 
-
+  createRecord(): void {
+    console.log('Not implemented yet! � ');
+  }
+  showStats(): void {
+    console.log('Not implemented yet! � ');
+  }
 
 }
