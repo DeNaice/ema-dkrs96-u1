@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import {Record} from "../record.model";
-import {Statistic} from "../statistic.model";
+import {Record} from "../../record.model";
+import {Statistic} from "../../statistic.model";
 import {IonButton, IonContent, IonHeader, IonNav, IonTitle, IonToolbar} from '@ionic/angular/standalone';
 
 @Component({
