@@ -1,20 +1,32 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
+import {Component, ViewChild} from '@angular/core';
+import {IonicModule} from "@ionic/angular";
+import { IonInput} from "@ionic/angular/standalone";
 
 @Component({
   selector: 'app-record-detail',
   templateUrl: './record-detail.page.html',
   styleUrls: ['./record-detail.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+  imports: [IonicModule]
 })
-export class RecordDetailPage implements OnInit {
+export class RecordDetailPage {
+  isEditMode = false;
+  pageTitle: any;
+  //record = new Record();
+  years: number[] = [(2018),(2019),(2020),(2021),(2022),(2023),(2024) ];
+  errors = new Map<string, string>();
+  @ViewChild('moduleNr')
+  private moduleNrRef: IonInput | undefined;
+
 
   constructor() { }
 
-  ngOnInit() {
+
+  deleteRecord() {
+
   }
 
+  save() {
+
+  }
 }

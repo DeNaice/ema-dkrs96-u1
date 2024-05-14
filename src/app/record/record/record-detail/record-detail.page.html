@@ -1,13 +1,96 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>record-detail</ion-title>
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>{{ pageTitle }}</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      @if (isEditMode) {
+        <ion-button (click)="deleteRecord()">
+          <ion-icon slot="icon-only" name="trash"></ion-icon>
+        </ion-button>
+      }
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
+<ion-content>
+  <ion-input class="ion-text-end"
+             #moduleNr
+             label="Modulnr*"
+             fill="solid"
+             type="text"
+             maxlength="10"
+             [counter]="true"
+             required>
+  </ion-input>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">record-detail</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-input class="ion-text-end"
+             #name
+             label="Name*"
+             fill="solid"
+             type="text"
+             maxlength="100"
+             [counter]="true"
+             required>
+  </ion-input>
+
+  <ion-input class="ion-text-end"
+             #sommersemester
+             label="Sommersemester"
+             fill="solid"
+             type="text"
+             maxlength="100"
+             [counter]="true"
+             >
+  </ion-input>
+
+  @if (errors.get('moduleNr')) {
+    <ion-text color="danger">
+      <p class="ion-text-end ion-no-margin ion-padding-end">
+        {{ errors.get('moduleNr') }}
+      </p>
+    </ion-text>
+  }
+
+
+  <ion-select fill="solid" label="Jahr" interface="popover">
+    @for (year of years; track year) {
+      <ion-select-option [value]="year">{{ year }}
+      </ion-select-option>
+    }
+  </ion-select>
+<br>
+  <ion-input class="ion-text-end"
+             #creditpoints
+             label="Creditpoints"
+             fill="solid"
+             type="number"
+             maxlength="1"
+             [counter]="true"
+  >
+  </ion-input>
+
+  <ion-input class="ion-text-end"
+             #note
+             label="Note"
+             fill="solid"
+             type="number"
+             maxlength="3"
+             [counter]="true"
+  >
+  </ion-input>
+
+  <ion-input class="ion-text-end"
+             #50%
+             label="50% - Leistung"
+             fill="solid"
+             type="text"
+             maxlength="100"
+             [counter]="true"
+  >
+  </ion-input>
+
+  <ion-button class="ion-padding" expand="block" (click)="save()">
+    Speichern
+  </ion-button>
 </ion-content>

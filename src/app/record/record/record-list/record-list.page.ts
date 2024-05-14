@@ -1,43 +1,56 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import {Record} from "../../record.model";
-import {Statistic} from "../../statistic.model";
-import {IonButton, IonContent, IonHeader, IonNav, IonTitle, IonToolbar} from '@ionic/angular/standalone';
+import {Component} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {FormsModule} from '@angular/forms';
+import {Record} from "../record.model";
+import {Statistic} from "../statistic.model";
+import {
+  IonAlert,
+  IonButton,
+  IonButtons,
+  IonContent,
+  IonHeader,
+  IonIcon, IonItem, IonList,
+  IonNav,
+  IonTitle,
+  IonToolbar
+} from '@ionic/angular/standalone';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-record-list',
   templateUrl: './record-list.page.html',
   styleUrls: ['./record-list.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonButton, IonNav]
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonButton, IonNav, IonButtons, IonIcon, IonList, IonItem, IonAlert]
 })
 export class RecordListPage {
-
+  message: string = "Hier fügen wir den Rest ein "
   records: Record[] = [];
 
-  constructor() {
+  constructor(private router: Router) {
     this.records.push(
-      new Record(1, 'CS000', 'Test', 6, 69, false, true, 2010),
-      new Record(2, 'CS001', 'Test2', 6, 85, false, false, 2011)
+      new Record(1, 'CS000', 'Compilerbau', 6, 69, false, true, 2021),
+      new Record(2, 'CS001', 'Webbasierte Systeme 2', 6, 100, false, false, 2024)
     );
   }
 
 
+  createRecord() {
+    this.router.navigate(['record-detail']);
+  }
 
-  logKennzahlen(){
-
-    const stats = new Statistic(this.records);
-
-    console.log('Anzahl der Datensätze:', stats.recordCount);
-    console.log('Anzahl der halbgewichteten Datensätze:', stats.hwCount);
-    console.log('Summe der Leistungspunkte:', stats.sumCrp);
-    console.log('Fehlende Leistungspunkte bis zum Abschluss:', stats.crpToEnd);
-    console.log('Durchschnittsnote:', stats.averageGrade);
-
-
+  editRecord({record}: { record: Record }) {
+    this.router.navigate(['record-detail', {id: record.id}]);
   }
 
 
-
+  getStatisticsMessage() {
+    return `
+      Anzahl der Datensätze:
+      Anzahl der halbgewichteten Datensätze:
+      Summe der Leistungspunkte:
+      Fehlende Leistungspunkte bis zum Abschluss:
+      Durchschnittsnote:
+    `;
+  }
 }
