@@ -1,7 +1,7 @@
 import {Component, ViewChild} from '@angular/core';
 import {IonicModule} from "@ionic/angular";
 import { IonInput} from "@ionic/angular/standalone";
-
+import {Record} from "../record.model";
 @Component({
   selector: 'app-record-detail',
   templateUrl: './record-detail.page.html',
@@ -27,6 +27,7 @@ export class RecordDetailPage {
   }
 
   save() {
+
 
   }
 }

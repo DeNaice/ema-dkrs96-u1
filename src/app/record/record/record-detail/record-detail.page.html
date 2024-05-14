@@ -34,15 +34,9 @@
              required>
   </ion-input>
 
-  <ion-input class="ion-text-end"
-             #sommersemester
-             label="Sommersemester"
-             fill="solid"
-             type="text"
-             maxlength="100"
-             [counter]="true"
-             >
-  </ion-input>
+  <ion-item fill="solid">
+    <ion-checkbox>Sommersemester</ion-checkbox>
+  </ion-item>
 
   @if (errors.get('moduleNr')) {
     <ion-text color="danger">
@@ -59,7 +53,7 @@
       </ion-select-option>
     }
   </ion-select>
-<br>
+  <br>
   <ion-input class="ion-text-end"
              #creditpoints
              label="Creditpoints"
@@ -80,15 +74,9 @@
   >
   </ion-input>
 
-  <ion-input class="ion-text-end"
-             #50%
-             label="50% - Leistung"
-             fill="solid"
-             type="text"
-             maxlength="100"
-             [counter]="true"
-  >
-  </ion-input>
+  <ion-item fill="solid">
+    <ion-checkbox>50%-Leistung</ion-checkbox>
+  </ion-item>
 
   <ion-button class="ion-padding" expand="block" (click)="save()">
     Speichern
