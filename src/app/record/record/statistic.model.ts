@@ -1,4 +1,4 @@
-import {Record} from './record.model';
+import { Record } from './record.model';
 
 export class Statistic {
   private readonly _records: Record[];
@@ -31,19 +31,24 @@ export class Statistic {
     if (this._records.length === 0) return 0;
 
     for (const record of this._records) {
-
       if (record.halfWeighted) {
-
-        totalGrade += record.grade / 2
-        totalModules += 0.5
-
+        totalGrade += record.grade / 2;
+        totalModules += 0.5;
       } else {
-
-        totalGrade += record.grade
-        totalModules += 1
-
+        totalGrade += record.grade;
+        totalModules += 1;
       }
     }
-    return Math.round(totalGrade / totalModules)
+    return Math.round(totalGrade / totalModules);
+  }
+
+  getStatisticsMessage(): string {
+    return `
+      Anzahl der Datensätze: ${this.recordCount}
+      Anzahl der halbgewichteten Datensätze: ${this.hwCount}
+      Summe der Leistungspunkte: ${this.sumCrp}
+      Fehlende Leistungspunkte bis zum Abschluss: ${this.crpToEnd}
+      Durchschnittsnote: ${this.averageGrade}
+    `;
   }
 }

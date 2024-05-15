@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Leistungen</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button id = "infos-alert">
+        Show Stats
+      </ion-button>
+      <ion-alert
+        trigger = "infos-alert"
+        header = "Leistungen"
+        [message] = getStatisticsMessage()
+        ></ion-alert>
+      <ion-button (click)="createRecord()">
+        <ion-icon slot="icon-only" name="add"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+<ion-list>
+  @for (record of records; track record.id) {
+    <ion-item button (click)="editRecord({ record: record })">
+      {{ record.moduleName }} {{ record.moduleNr }}
+      ({{ record.grade }}%, {{ record.crp }}crp)
+    </ion-item>
+  }
+</ion-list>
+</ion-content>
