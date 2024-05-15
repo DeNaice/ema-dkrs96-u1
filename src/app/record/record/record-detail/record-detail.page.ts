@@ -4,13 +4,14 @@ import { IonInput} from "@ionic/angular/standalone";
 import {ActivatedRoute, Router} from '@angular/router';
 import {Record} from "../record.model";
 import {RecordService} from "../record.service";
+import {FormsModule} from "@angular/forms";
 
 @Component({
   selector: 'app-record-detail',
   templateUrl: './record-detail.page.html',
   styleUrls: ['./record-detail.page.scss'],
   standalone: true,
-  imports: [IonicModule]
+  imports: [IonicModule, FormsModule]
 })
 export class RecordDetailPage {
   isEditMode = false;
@@ -39,15 +40,23 @@ export class RecordDetailPage {
   }
 
 
-  deleteRecord() {
-
-
+  deleteRecord(record: Record) {
+    this.recordService.delete(record.id)
   }
 
   save() {
     this.errors.clear();
     if (!this.record.moduleNr) {
       this.errors.set('moduleNr', 'Modulnummer darf nicht leer sein!');
+    }
+    if (!this.record.moduleName) {
+      this.errors.set('moduleName', 'Modulname darf nicht leer sein!');
+    }
+    if (!this.record.crp) {
+      this.errors.set('crp', 'Creditpoint darf nicht leer sein!');
+    }
+    if (!this.record.grade) {
+      this.errors.set('note', 'Note darf nicht leer sein!');
     }
     if (this.errors.size === 0) {
       if (this.isEditMode) {

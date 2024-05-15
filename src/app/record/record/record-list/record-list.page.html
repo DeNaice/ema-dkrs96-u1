@@ -18,7 +18,12 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
-
+  <ion-card *ngIf="records.length === 0">
+    <ion-card-header>
+      <ion-card-title>Du hast noch keine Leistungen eingetragen 😢</ion-card-title>
+    </ion-card-header>
+    <ion-button (click)="createRecord()" style="padding: 10px" expand="block">Jetzt Leistung eintragen</ion-button>
+  </ion-card>
 <ion-list>
   <ion-item-sliding *ngFor="let record of records">
     <ion-item button (click)="editRecord({ record: record })">

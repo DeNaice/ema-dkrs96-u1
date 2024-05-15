@@ -41,7 +41,6 @@ export class Statistic {
     }
     return Math.round(totalGrade / totalModules);
   }
-
   getStatisticsMessage(): string {
     return `
       Anzahl der Datensätze: ${this.recordCount}

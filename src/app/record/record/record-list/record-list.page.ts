@@ -2,12 +2,14 @@ import {Component, inject} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 import {Record} from "../record.model";
+import {Router} from '@angular/router';
+import {RecordService} from "../record.service";
 import {Statistic} from "../statistic.model";
 import {
   AlertController,
   IonAlert,
   IonButton,
-  IonButtons,
+  IonButtons, IonCard, IonCardHeader, IonCardTitle,
   IonContent,
   IonHeader,
   IonIcon, IonItem, IonItemOption, IonItemOptions, IonItemSliding, IonList,
@@ -15,27 +17,26 @@ import {
   IonTitle,
   IonToolbar
 } from '@ionic/angular/standalone';
-import {Router} from '@angular/router';
-import {RecordService} from "../record.service";
+
 
 @Component({
   selector: 'app-record-list',
   templateUrl: './record-list.page.html',
   styleUrls: ['./record-list.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonButton, IonNav, IonButtons, IonIcon, IonList, IonItem, IonAlert, IonItemSliding, IonItemOptions, IonItemOption]
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonButton, IonNav, IonButtons, IonIcon, IonList, IonItem, IonAlert, IonItemSliding, IonItemOptions, IonItemOption, IonCard, IonCardHeader, IonCardTitle]
 })
+
 export class RecordListPage {
   message: string = "Hier fügen wir den Rest ein "
   records: Record[] = [];
+  statistic: Statistic
 
   constructor(private router: Router,
               private alertController: AlertController,
               private recordService: RecordService) {
-    this.records.push(
-      new Record(1, 'CS000', 'Compilerbau', 6, 69, false, true, 2021),
-      new Record(2, 'CS001', 'Webbasierte Systeme 2', 6, 100, false, false, 2024)
-    );
+    this.records = recordService.findAll()
+    this.statistic = new Statistic(this.records);
   }
 
 
@@ -50,11 +51,11 @@ export class RecordListPage {
 
   getStatisticsMessage() {
     return `
-      Anzahl der Datensätze:
-      Anzahl der halbgewichteten Datensätze:
-      Summe der Leistungspunkte:
-      Fehlende Leistungspunkte bis zum Abschluss:
-      Durchschnittsnote:
+      Anzahl der Datensätze: ${this.statistic.recordCount}
+      Anzahl der halbgewichteten Datensätze: ${this.statistic.hwCount}
+      Summe der Leistungspunkte: ${this.statistic.sumCrp}
+      Fehlende Leistungspunkte bis zum Abschluss: ${this.statistic.crpToEnd}
+      Durchschnittsnote: ${this.statistic.averageGrade}
     `;
   }
 
