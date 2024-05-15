@@ -48,6 +48,14 @@ export class RecordDetailPage {
     if (!this.record.moduleNr) {
       this.errors.set('moduleNr', 'Modulnummer darf nicht leer sein!');
     }
+    if (this.errors.size === 0) {
+      if (this.isEditMode) {
+        this.recordService.update(this.record);
+      } else {
+        this.recordService.persist(this.record);
+      }
+      this.navCtrl.pop();
+    }
   }
 
     gotorecordlist()
