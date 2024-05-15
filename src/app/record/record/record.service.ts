@@ -29,6 +29,9 @@ export class RecordService {
   }
 
   delete(id: number | null): boolean {
+    if (id==null){
+      return false
+    }
     const index = this.records.findIndex(record => record.id === id);
     if (index !== -1) {
       this.records.splice(index, 1);

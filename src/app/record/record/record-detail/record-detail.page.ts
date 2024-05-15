@@ -41,6 +41,7 @@ export class RecordDetailPage {
 
   deleteRecord() {
 
+
   }
 
   save() {
