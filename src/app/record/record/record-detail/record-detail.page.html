@@ -2,7 +2,7 @@
   <ion-toolbar color="primary">
     <ion-title>{{ pageTitle }}</ion-title>
     <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
+      <ion-back-button (click)="gotorecordlist()"></ion-back-button>
     </ion-buttons>
     <ion-buttons slot="end">
       @if (isEditMode) {

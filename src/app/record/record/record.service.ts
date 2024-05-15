@@ -1,6 +1,10 @@
 import { Record } from './record.model';
-
+import { Injectable } from '@angular/core';
+@Injectable({
+  providedIn: 'root'
+})
 export class RecordService {
+
   private records: Record[] = [];
 
   persist(record: Record): void {
