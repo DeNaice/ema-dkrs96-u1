@@ -2,7 +2,22 @@
   <ion-toolbar color="primary">
     <ion-title>Leistungen</ion-title>
 
+
+
     <ion-buttons slot="end">
+      @if (searchbarVisible) {
+        <ion-searchbar (ionInput)="doSearch()"
+                       (ionCancel)="cancelSearch()"
+                       showCancelButton="always"
+                       placeholder="Modul suchen">
+        </ion-searchbar>
+      }
+      <ion-button (click)="showSearchbar()">
+        <ion-icon name="search-outline"></ion-icon>
+      </ion-button>
+      <ion-button (click)="shareRecords()">
+        <ion-icon name="share-social-outline"></ion-icon>
+      </ion-button>
       <ion-button id = "infos-alert">
         Show Stats
       </ion-button>
@@ -17,7 +32,12 @@
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
+
+
 <ion-content>
+
+
+
   <ion-card *ngIf="records.length === 0">
     <ion-card-header>
       <ion-card-title>Du hast noch keine Leistungen eingetragen 😢</ion-card-title>

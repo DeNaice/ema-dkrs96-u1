@@ -1,10 +1,11 @@
-import {Component, inject} from '@angular/core';
+import {Component, inject, ViewChild} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 import {Record} from "../record.model";
 import {Router} from '@angular/router';
 import {RecordService} from "../record.service";
 import {Statistic} from "../statistic.model";
+import {Share} from '@capacitor/share';
 import {
   AlertController,
   IonAlert,
@@ -13,7 +14,7 @@ import {
   IonContent,
   IonHeader,
   IonIcon, IonItem, IonItemOption, IonItemOptions, IonItemSliding, IonList,
-  IonNav,
+  IonNav, IonSearchbar,
   IonTitle,
   IonToolbar
 } from '@ionic/angular/standalone';
@@ -24,19 +25,29 @@ import {
   templateUrl: './record-list.page.html',
   styleUrls: ['./record-list.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonButton, IonNav, IonButtons, IonIcon, IonList, IonItem, IonAlert, IonItemSliding, IonItemOptions, IonItemOption, IonCard, IonCardHeader, IonCardTitle]
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonButton, IonNav, IonButtons, IonIcon, IonList, IonItem, IonAlert, IonItemSliding, IonItemOptions, IonItemOption, IonCard, IonCardHeader, IonCardTitle, IonSearchbar]
 })
 
 export class RecordListPage {
-  message: string = "Hier fügen wir den Rest ein "
   records: Record[] = [];
   statistic: Statistic
+  searchbarVisible: boolean;
 
+  #searchbar: IonSearchbar | undefined;
+  @ViewChild(IonSearchbar)
+  set searchbar(sb: IonSearchbar) {
+    if (sb) {
+      sb.setFocus();
+      this.#searchbar = sb;
+    }
+
+  }
   constructor(private router: Router,
               private alertController: AlertController,
               private recordService: RecordService) {
     this.records = recordService.findAll()
-    this.statistic = new Statistic(this.records);
+    this.statistic = new Statistic(this.records)
+    this.searchbarVisible = false;
   }
 
 
@@ -83,6 +94,37 @@ export class RecordListPage {
 
     this.recordService.delete(record.id)
     this.recordService.findAll()
+
+  }
+
+  shareRecords() {
+    const records = this.recordService.findAll();
+    let msgText = records.map(record => `${record.moduleName} ${record.grade}%`).join('\n');
+
+    Share.canShare().then(canShare => {
+      if (canShare.value) {
+        Share.share({
+          title: 'Meine Studienleistungen',
+          text: msgText,
+          dialogTitle: 'Leistungen teilen'
+        }).then((v) => console.log('ok: ', v))
+          .catch(err => console.log(err));
+      } else {
+        console.log('Error: Sharing not available!');
+      }
+    });
+  }
+
+  showSearchbar() {
+    this.searchbarVisible = true;
+
+  }
+
+  cancelSearch() {
+
+  }
+
+  doSearch() {
 
   }
 }

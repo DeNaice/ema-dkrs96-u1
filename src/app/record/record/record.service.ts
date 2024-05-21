@@ -35,9 +35,6 @@ export class RecordService {
     return this.records.find(record => record.id === id);
   }
 
-  count(): number {
-    return this.findAll().length;
-  }
 
   update(record: Record): boolean {
     const index = this.records.findIndex(r => r.id === record.id);
@@ -64,5 +61,9 @@ export class RecordService {
       return true;
     }
     return false;
+  }
+
+  load() {
+
   }
 }

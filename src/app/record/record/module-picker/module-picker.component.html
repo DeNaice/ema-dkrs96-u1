@@ -1,0 +1,20 @@
+<ion-header>
+  @if (searchbarVisible) {
+    <ion-searchbar (ionInput)="doSearch()"
+                   (ionCancel)="cancelSearch()"
+                   showCancelButton="always"
+                   placeholder="Modul suchen">
+    </ion-searchbar>
+  }
+</ion-header>
+<ion-content>
+  <ion-list>
+    @for (record of filteredModules; track record.id) {
+      <ion-item button (click)="modalController.dismiss(record)">
+        {{ record.moduleName }}
+      </ion-item>
+    }
+  </ion-list>
+
+</ion-content>
+
