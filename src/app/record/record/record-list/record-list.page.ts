@@ -32,6 +32,7 @@ export class RecordListPage {
   records: Record[] = [];
   statistic: Statistic
   searchbarVisible: boolean;
+  filteredRecords: Record[] = [];
 
   #searchbar: IonSearchbar | undefined;
   @ViewChild(IonSearchbar)
@@ -121,7 +122,7 @@ export class RecordListPage {
   }
 
   cancelSearch() {
-
+    this.searchbarVisible = false;
   }
 
   doSearch() {

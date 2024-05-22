@@ -1,10 +1,11 @@
 import {Component, ViewChild, inject} from '@angular/core';
 import {IonicModule, NavController} from "@ionic/angular";
-import { IonInput} from "@ionic/angular/standalone";
+import {IonInput, ModalController} from "@ionic/angular/standalone";
 import {ActivatedRoute, Router} from '@angular/router';
 import {Record} from "../record.model";
 import {RecordService} from "../record.service";
 import {FormsModule} from "@angular/forms";
+import {ModulePickerComponent} from "../../module/module-picker/module-picker.component";
 
 @Component({
   selector: 'app-record-detail',
@@ -26,7 +27,8 @@ export class RecordDetailPage {
   constructor(private router: Router,
               private recordService: RecordService,
               private route: ActivatedRoute,
-              private navCtrl: NavController,) {
+              private navCtrl: NavController,
+              private modalController: ModalController,) {
     const recordId = route.snapshot.paramMap.get('id');
 
     if (recordId) {
@@ -36,7 +38,18 @@ export class RecordDetailPage {
     } else {
       this.pageTitle = 'Leistung erstellen';
       this.record.year = new Date().getFullYear();
+      this.selectModule();
     }
+  }
+
+  async selectModule() {
+    const modal = await this.modalController.create({
+      component: ModulePickerComponent
+    });
+    await modal.present();
+    const result = await modal.onDidDismiss();
+
+
   }
 
 
