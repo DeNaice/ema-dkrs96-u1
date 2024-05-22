@@ -126,8 +126,12 @@ export class RecordListPage {
   }
 
   doSearch() {
-
-    // TODO SEARCH
+    if (!this.records){
+      ("No Records found")
+    }
+      this.filteredRecords = this.records.filter(record => {
+        record.moduleName.toLowerCase().includes(this.filteredRecords.toString())
+      })
 
   }
 }
