@@ -45,7 +45,7 @@ export class ModulePickerComponent {
 
   doSearch() {
 
- this.filteredModules = this.modules.filter(m => m.moduleName.toLowerCase())
+ this.filteredModules = this.modules.filter(m => m.name.toLowerCase())
 
   }
 

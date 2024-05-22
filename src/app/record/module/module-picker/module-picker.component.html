@@ -9,9 +9,9 @@
 </ion-header>
 <ion-content>
   <ion-list>
-    @for (module of filteredModules; track module.moduleNr) {
+    @for (module of filteredModules; track module.nr) {
       <ion-item button (click)="modalController.dismiss(module)">
-        {{ module.moduleName }}
+        {{ module.name }}
       </ion-item>
     }
   </ion-list>

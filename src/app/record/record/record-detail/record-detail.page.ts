@@ -48,7 +48,11 @@ export class RecordDetailPage {
     });
     await modal.present();
     const result = await modal.onDidDismiss();
-
+    if (result.data){
+      this.record.moduleNr = result.data.nr
+      this.record.moduleName = result.data.name
+      this.record.crp = result.data.crp
+    }
 
   }
 

@@ -127,5 +127,7 @@ export class RecordListPage {
 
   doSearch() {
 
+    // TODO SEARCH
+
   }
 }

@@ -1,13 +1,13 @@
 export class Module {
 
-  moduleNr: string
-  moduleName: string
-  moduleCrp: number
+  nr: string
+  name: string
+  crp: number
 
 
-  constructor(moduleNr: string, moduleName: string, moduleCrp: number) {
-    this.moduleNr = moduleNr
-    this.moduleName = moduleName
-    this.moduleCrp = moduleCrp
+  constructor(nr: string, name: string, crp: number) {
+    this.nr = nr
+    this.name = name
+    this.crp = crp
   }
 }
