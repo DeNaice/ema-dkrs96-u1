@@ -49,6 +49,7 @@ export class RecordListPage {
     this.records = recordService.findAll()
     this.statistic = new Statistic(this.records)
     this.searchbarVisible = false;
+    this.filteredRecords = [...this.records];
   }
 
 
@@ -125,13 +126,16 @@ export class RecordListPage {
     this.searchbarVisible = false;
   }
 
-  doSearch() {
-    if (!this.records){
-      ("No Records found")
+  doSearch(event: any) {
+    const searchTerm = event.target.value.toLowerCase();
+    if (!searchTerm) {
+      this.filteredRecords = [...this.records];
+      return;
     }
-      this.filteredRecords = this.records.filter(record => {
-        record.moduleName.toLowerCase().includes(this.filteredRecords.toString())
-      })
 
+    this.filteredRecords = this.records.filter(record =>
+      record.moduleName.toLowerCase().includes(searchTerm)
+    );
   }
+
 }

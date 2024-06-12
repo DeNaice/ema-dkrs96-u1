@@ -6,7 +6,7 @@
 
     <ion-buttons slot="end">
       @if (searchbarVisible) {
-        <ion-searchbar (ionInput)="doSearch()"
+        <ion-searchbar (ionInput)="doSearch($event)"
                        (ionCancel)="cancelSearch()"
                        showCancelButton="always"
                        placeholder="Modul suchen">
